@@ -1,5 +1,5 @@
 NOTE: Actually, the trial of CRF layer has failed! The outputs are indentifed to be all 1. The main contribution of this phrase is the construction and expansion of the data.
-But you can still try the following step to test the model.
+But you can still try the following steps to test the model.
 Step 1: Put the test video like 'DataType_testX.mark.mp4' under the 'part_6/marked/' directory.  
 Step 2: Run the script with 2 parameters 'data_type' and 'test_video_file_location', like if you want to test the veido 'foot_pacing_test1.mark.mp4', just run: python foot_sentiment.py foot_pacing ./marked/foot_pacing_test1.mark.mp4
 Then will get the 'DataType_pred_label_crf.png' and 'frameLabel_crf.json' files as resutls.
