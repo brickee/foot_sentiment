@@ -534,7 +534,7 @@ def Predict_CNN(data_type = 'foot_withdrawing' ,test_video='./marked/foot_withdr
     frames,frame_rate = get_frames(predict_videoFile=test_video)
     X_test = torch.tensor(prepare_data(frames),dtype=torch.float)
 
-    model = torch.load('./save/cnn_model_neg_resnet1_%s'%data_type, map_location=device)
+    model = torch.load('./save/cnn_model_neg_resnet_%s'%data_type, map_location=device)
     model.eval()
 
     # for debugging!
@@ -558,17 +558,17 @@ def Predict_CNN(data_type = 'foot_withdrawing' ,test_video='./marked/foot_withdr
     results_dic = {}
     results_dic[file_name] = []
     for i,score in enumerate(scores):
-        results_dic[file_name].append([str(i),str(score[1])])
+        results_dic[file_name].append([str(i/frame_rate),str(score[1])])
         pred_scores.append(score[1])
-    print('Saving results to frameLabel.json')
-    with open('./frameLabel_test_resnet.json','a') as f:
+    print('Saving results to timeLabel.json')
+    with open('./timeLabel.json','a') as f:
         json.dump(results_dic,f)
         f.write('\n')
-    print('Saving results to figure %s_pred_label_neg_resnet1.png'%file_name)
+    print('Saving results to figure timeLabel.png')
     # print(pred_scores)
     x_axis = [i/frame_rate for i in range(len(pred_scores))]
     plt.plot(x_axis,pred_scores)
-    plt.savefig('%s_pred_label_neg_resnet1.png'%file_name)
+    plt.savefig('timeLabel.png')
     # plt.show(block=True)
     # plt.close()
 
@@ -594,9 +594,14 @@ if __name__ == '__main__':
     # 4. Data_types: foot_pacing; foot_withdrawing; foot_turning_away;
     # 5. After prediction, the results are saved in 'frameLabel.json' and 'FILENAME_pred_label.png'
     # Predict the results
-    if len(sys.argv) == 3:
-        data_type = sys.argv[1]
-        test_video = sys.argv[2]
-        Predict_CNN(data_type = data_type,test_video=test_video)
-    else:
-        Predict_CNN()
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Test vedio')
+    parser.add_argument('--type', default='foot_withdrawing',
+                        help='3 options: foot_withdrawing, foot_pacing, foot_turning_away')
+    parser.add_argument('--video', default='./marked/8_types_of_actions_trim.mark.mp4',
+                        help='path to test video')
+
+    args = parser.parse_args()
+    Predict_CNN(data_type=args.type, test_video=args.video)
+
