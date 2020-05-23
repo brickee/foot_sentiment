@@ -592,7 +592,7 @@ if __name__ == '__main__':
     # 2. Make sure that the models are located in './save/' directory
     # 3. The input of the model is the 'data_type' and the 'test_video' file location
     # 4. Data_types: foot_pacing; foot_withdrawing; foot_turning_away;
-    # 5. After prediction, the results are saved in 'frameLabel.json' and 'FILENAME_pred_label.png'
+    # 5. After prediction, the results are saved in 'timeLabel.json' and 'timeLabel.png'
     # Predict the results
     import argparse
 
