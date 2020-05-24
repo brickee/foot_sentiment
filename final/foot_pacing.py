@@ -653,7 +653,7 @@ def Predict_LRCN(data_type = 'foot_pacing' ,test_video='./pacing/marked_only_vid
     x_axis = [i/frame_rate for i in range(len(pred_scores))]
     plt.plot(x_axis,pred_scores)
     plt.ylim(-0.1, 1.1)
-    plt.savefig('./pacing/%s_%s.png'%(file_name,data_type))
+    plt.savefig('./pacing/%s_timeLabel_%s.png'%(file_name,data_type))
     # plt.show(block=True)
     # plt.close()
 
