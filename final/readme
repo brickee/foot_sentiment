@@ -3,5 +3,5 @@ source ./test.sh
 
 You only need to change the two variables in the shell script: 
 TYPE (options: foot_pacing, foot_withdrawing, foot_turning_away) to use different models 
-and VIDEO for the path to test video.
+VIDEO for the path to test video.
 You do not need to change the line of runing python. Because 'foot_pacing.py' can test any models on any videos.
